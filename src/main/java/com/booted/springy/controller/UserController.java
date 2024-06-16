@@ -22,16 +22,9 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-        if (userDto == null || userDto.getEmail() == null || userDto.getEmail().isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-       try {
            UserDto createdUser=userService.createUser(userDto);
            String emailStatus=mailService.sendMail(createdUser.getEmail(),"Account Creation","Thanks and welcome");
            System.out.println(emailStatus);
            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-       }catch (Exception e){
-           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-       }
     }
 }
