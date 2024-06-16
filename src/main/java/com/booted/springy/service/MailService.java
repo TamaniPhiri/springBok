@@ -12,5 +12,10 @@ public class MailService {
         SimpleMailMessage message=new SimpleMailMessage();
         message.setTo(to);
         message.setFrom("tamanigabriel0@gmail.com");
+        message.setSubject(subject);
+        message.setText(body);
+
+        mailSender.send(message);
+        System.out.println("Email sent successfully");
     }
 }
