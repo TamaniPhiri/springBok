@@ -20,6 +20,9 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+        if (userDto == null || userDto.getEmail() == null || userDto.getEmail().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
        try {
            UserDto createdUser=userService.createUser(userDto);
            mailService.sendMail(createdUser.getEmail(),"Account Creation","Thanks and welcome");
