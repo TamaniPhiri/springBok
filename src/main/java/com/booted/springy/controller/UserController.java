@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -19,8 +20,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-        UserDto createdUser=userService.createUser(userDto);
-        mailService.sendMail(createdUser.getEmail(),"Account Creation","Thanks and welcome");
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+       try {
+           UserDto createdUser=userService.createUser(userDto);
+           mailService.sendMail(createdUser.getEmail(),"Account Creation","Thanks and welcome");
+           return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+       }catch (Exception e){
+           return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+       }
     }
 }
