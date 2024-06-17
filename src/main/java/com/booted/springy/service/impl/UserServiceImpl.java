@@ -52,10 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto deleteUserById(Long id) {
+    public String deleteUserById(Long id) {
         User user=userRespository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("User with that ID doesn't exist"));
-
-        return null;
+        userRespository.deleteById(id);
+        return "User deleted successfully";
     }
+
 }
