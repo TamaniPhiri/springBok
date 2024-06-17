@@ -37,4 +37,10 @@ public class UserController {
         List<UserDto> users=userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<UserDto> updateUserById(@PathVariable("id") Long id,@RequestBody UserDto userDto){
+        UserDto user=userService.updateUserById(id,userDto);
+        return ResponseEntity.ok(user);
+    }
 }
