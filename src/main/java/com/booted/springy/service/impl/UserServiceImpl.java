@@ -9,6 +9,10 @@ import com.booted.springy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,5 +34,11 @@ public class UserServiceImpl implements UserService {
         User user=userRespository.findById(userId)
                 .orElseThrow(()-> new ResourceNotFoundException("User with that ID doesn't exist"));
         return UserMapper.mapToUserDto(user);
+    }
+
+    @Override
+    public Set<UserDto> getAllUsers() {
+        List<User> users=userRespository.findAll();
+        return users.stream().map((user)->UserMapper.mapToUserDto(user)).collect(Collectors.toSet());
     }
 }
