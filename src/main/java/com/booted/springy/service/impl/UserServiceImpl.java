@@ -2,6 +2,7 @@ package com.booted.springy.service.impl;
 
 import com.booted.springy.dto.UserDto;
 import com.booted.springy.entity.User;
+import com.booted.springy.exceptions.ResourceNotFoundException;
 import com.booted.springy.mapper.UserMapper;
 import com.booted.springy.respository.UserRespository;
 import com.booted.springy.service.UserService;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Long userId) {
-        User user=UserMapper.mapToUser(userId);
-        return null;
+        User user=userRespository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User with that ID doesn't exist"));
+        return UserMapper.mapToUserDto(user);
     }
 }
