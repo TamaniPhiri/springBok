@@ -1,7 +1,6 @@
 package com.booted.springy.controller;
 
 import com.booted.springy.dto.UserDto;
-import com.booted.springy.entity.User;
 import com.booted.springy.service.MailService;
 import com.booted.springy.service.UserService;
 import lombok.AllArgsConstructor;
