@@ -24,4 +24,9 @@ public class UserController {
            System.out.println(emailStatus);
            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
+
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
+        UserDto user=userService.getUserById(id);
+
+    }
 }
