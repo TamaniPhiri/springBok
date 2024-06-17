@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
         User updatedUser=userRespository.save(user);
         return UserMapper.mapToUserDto(updatedUser);
     }
+
+    @Override
+    public UserDto deleteUserById(Long id) {
+        return null;
+    }
 }
