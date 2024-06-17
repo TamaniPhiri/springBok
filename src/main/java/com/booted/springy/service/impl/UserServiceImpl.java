@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -37,8 +36,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         List<User> users=userRespository.findAll();
-        return users.stream().map((user)->UserMapper.mapToUserDto(user)).collect(Collectors.toSet());
+        return users.stream().map((user)->UserMapper.mapToUserDto(user)).collect(Collectors.toList());
     }
 }
