@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService {
         User createdUser=userRespository.save(user);
         return UserMapper.mapToUserDto(createdUser);
     }
+
+    @Override
+    public UserDto getUserById(Long userId) {
+        User user=UserMapper.mapToUser(userId);
+        return null;
+    }
 }
