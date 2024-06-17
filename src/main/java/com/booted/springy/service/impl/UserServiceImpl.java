@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(Long userId) {
-        User user=userRespository.findById(userId)
+    public UserDto getUserById(Long id) {
+        User user=userRespository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("User with that ID doesn't exist"));
         return UserMapper.mapToUserDto(user);
     }
@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateUserById(Long userId, UserDto userDto) {
-        User user=userRespository.findById(userId)
+    public UserDto updateUserById(Long id, UserDto userDto) {
+        User user=userRespository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("User with that ID doesn't exist"));
         user.setEmail(userDto.getEmail());
         user.setName(userDto.getName());
@@ -53,6 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto deleteUserById(Long id) {
+        User user=userRespository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("User with that ID doesn't exist"));
+
         return null;
     }
 }
